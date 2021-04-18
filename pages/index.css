@@ -10,3 +10,11 @@
 /* header styles */
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
+
+/* profile section styles */
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__author/profile__author.css);
+@import url(../blocks/profile/__edit-profile/profile__edit-profile.css);
+@import url(../blocks/profile/__about-author/profile__about-author.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);

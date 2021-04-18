@@ -1,0 +1,22 @@
+.profile__edit-profile {
+  width: 10px;
+  height: 10px;
+  margin-left: 18px;
+  padding: 7px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: opacity .3s;
+}
+
+.profile__edit-profile:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 480px) {
+  .profile__edit-profile {
+    width: 8px;
+    height: 8px;
+    padding: 5px;
+    margin-left: 10px;
+  }
+}

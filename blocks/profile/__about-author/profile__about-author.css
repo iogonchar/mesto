@@ -1,0 +1,22 @@
+.profile__about-author {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #fff;
+  margin: 16px 0 0;
+}
+
+@media (max-width: 768px) {
+  .profile__about-author {
+    text-align: center;
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile__about-author {
+    font-size: 14px;
+  }
+}
