@@ -1,0 +1,8 @@
+.places__place {
+  width: 282px;
+  background-color: #fff;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 45px;
+  justify-self: center;
+}
