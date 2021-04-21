@@ -25,3 +25,7 @@
 @import url(../blocks/places/__img/places__img.css);
 @import url(../blocks/places/__title/places__title.css);
 @import url(../blocks/places/__like-place/places__like-place.css);
+
+/* footer styles */
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
