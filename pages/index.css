@@ -7,6 +7,16 @@
 /* body styles */
 @import url(../blocks/body/body.css);
 
+/* popup styles */
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__form-close/popup__form-close.css);
+@import url(../blocks/popup/__form-input/popup__form-input.css);
+@import url(../blocks/popup/__form-submit/popup__form-submit.css);
+
 /* header styles */
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);

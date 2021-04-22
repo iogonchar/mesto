@@ -1,0 +1,20 @@
+.popup__form-close {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  cursor: pointer;
+  transition: opacity .3s;
+}
+
+.popup__form-close:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .popup__form-close {
+    width: 45px;
+    height: 45px;
+    top: -65px;
+    right: 0;
+  }
+}
