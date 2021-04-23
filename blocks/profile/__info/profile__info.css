@@ -8,3 +8,9 @@
     max-width: 350px;
   }
 }
+
+@media (max-width: 478px) {
+  .profile__info {
+    max-width: 215px;
+  }
+}
