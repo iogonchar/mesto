@@ -10,7 +10,7 @@
 <body class="body">
   <section class="popup">
     <div class="popup__container">
-      <img class="popup__form-close" src="./images/close-icon.svg" alt="Закрыть">
+      <button class="popup__form-close-btn"><img class="popup__form-close" src="./images/close-icon.svg" alt="Закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="popup-form" action="#">
         <input class="popup__form-input" id="author" name="author" type="text" required>
@@ -28,13 +28,13 @@
     <section class="profile">
       <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
       <div class="profile__info">
-        <h1 class="profile__author">Жак-Ив Кусто</h1>
-        <img class="profile__edit-profile" src="./images/edit-profile.svg" alt="Редактировать профиль">
-        <p class="profile__about-author">Исследователь океана</p>
+        <div class="profile__info-content">
+          <h1 class="profile__author">Жак-Ив Кусто</h1>
+          <p class="profile__about-author">Исследователь океана</p>
+        </div>
+        <button class="profile__edit-profile-btn"><img class="profile__edit-profile" src="./images/edit-profile.svg" alt="Редактировать профиль"></button>
       </div>
-
       <button class="profile__add-button"><img class="profile__add-button-img" src="./images/add-button.svg" alt="Добавить"></button>
-
     </section>
 
     <section class="places">

@@ -1,0 +1,15 @@
+.profile__info-content {
+  max-width: 500px;
+}
+
+@media (max-width: 1024px) {
+  .profile__info-content {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 478px) {
+  .profile__info-content {
+    max-width: 215px;
+  }
+}

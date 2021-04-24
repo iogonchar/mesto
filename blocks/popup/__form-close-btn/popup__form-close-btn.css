@@ -1,4 +1,7 @@
-.popup__form-close {
+.popup__form-close-btn {
+  padding: 0;
+  background: none;
+  border: none;
   position: absolute;
   top: -50px;
   right: -50px;
@@ -6,12 +9,12 @@
   transition: opacity .3s;
 }
 
-.popup__form-close:hover {
+.popup__form-close-btn:hover {
   opacity: 0.6;
 }
 
 @media (max-width: 768px) {
-  .popup__form-close {
+  .popup__form-close-btn {
     width: 45px;
     height: 45px;
     top: -65px;
