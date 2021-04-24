@@ -14,7 +14,6 @@
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__form-close-btn/popup__form-close-btn.css);
-@import url(../blocks/popup/__form-close/popup__form-close.css);
 @import url(../blocks/popup/__form-input/popup__form-input.css);
 @import url(../blocks/popup/__form-submit/popup__form-submit.css);
 
@@ -40,7 +39,6 @@
 @import url(../blocks/places/__img/places__img.css);
 @import url(../blocks/places/__title/places__title.css);
 @import url(../blocks/places/__like-place-btn/places__like-place-btn.css);
-@import url(../blocks/places/__like-place/places__like-place.css);
 
 /* footer styles */
 @import url(../blocks/footer/footer.css);
