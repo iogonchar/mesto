@@ -8,17 +8,37 @@
   <title lang="en">Mesto</title>
 </head>
 <body class="body">
-  <section class="popup">
-    <div class="popup__container">
-      <button class="popup__form-close-btn" type="button"><img class="popup__form-close" src="./images/close-icon.svg" alt="Закрыть"></button>
+  <div class="popup popup_type_form" id="edit-profile-popup">
+    <div class="popup__container popup__container_type_form">
+      <button class="popup__form-close-btn" type="button" id="close-edit-profile-popup"><img class="popup__form-close" src="./images/close-icon.svg" alt="Закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="popup-form" action="#">
+      <form class="popup__form" name="popup-form" id="popup-edit-profile-form" action="#">
         <input class="popup__form-input" id="author" name="author" type="text" required>
         <input class="popup__form-input" id="about-author" name="about-author" type="text" required>
         <button class="popup__form-submit" type="submit">Сохранить</button>
       </form>
     </div>
-  </section>
+  </div>
+
+  <div class="popup popup_type_form" id="add-place-popup">
+    <div class="popup__container popup__container_type_form">
+      <button class="popup__form-close-btn" type="button" id="close-add-place-popup"><img class="popup__form-close" src="./images/close-icon.svg" alt="Закрыть"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" name="popup-form" id="popup-add-place-form" action="#">
+        <input class="popup__form-input" id="place" name="place" type="text" placeholder="Название" required>
+        <input class="popup__form-input" id="place-img" name="place-img" type="text" placeholder="Ссылка на картинку" required>
+        <button class="popup__form-submit" type="submit" id="add-place-submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_slide" id="place-popup">
+    <div class="popup__container">
+      <button class="popup__form-close-btn" type="button" id="place-popup-close"><img class="popup__form-close" src="./images/close-icon.svg" alt="Закрыть"></button>
+      <img class="popup__img">
+      <p class="popup__text"></p>
+    </div>
+  </div>
 
   <header class="header">
     <img class="header__logo" src="./images/logo.svg" alt="Логотип">
@@ -38,42 +58,21 @@
     </section>
 
     <section class="places">
-      <div class="places__place">
-        <img class="places__img" src="./images/karachaevo.jpg" alt="Карачаевск">
-        <h2 class="places__title">Карачаевск</h2>
-        <button class="places__like-place-btn" type="button"><img class="places__like-place" src="./images/like-icon.svg" alt="Лайкнуть"></button>
-      </div>
-      <div class="places__place">
-        <img class="places__img" src="./images/elbrus.jpg" alt="Эльбрус">
-        <h2 class="places__title">Гора Эльбрус</h2>
-        <button class="places__like-place-btn" type="button"><img class="places__like-place" src="./images/like-icon.svg" alt="Лайкнуть"></button>
-      </div>
-      <div class="places__place">
-        <img class="places__img" src="./images/dombai.jpg" alt="Домбай">
-        <h2 class="places__title">Домбай</h2>
-        <button class="places__like-place-btn" type="button"><img class="places__like-place" src="./images/like-icon.svg" alt="Лайкнуть"></button>
-      </div>
-      <div class="places__place">
-        <img class="places__img" src="./images/elbrus.jpg" alt="Эльбрус">
-        <h2 class="places__title">Гора Эльбрус</h2>
-        <button class="places__like-place-btn" type="button"><img class="places__like-place" src="./images/like-icon.svg" alt="Лайкнуть"></button>
-      </div>
-      <div class="places__place">
-        <img class="places__img" src="./images/dombai.jpg" alt="Домбай">
-        <h2 class="places__title">Домбай</h2>
-        <button class="places__like-place-btn" type="button"><img class="places__like-place" src="./images/like-icon.svg" alt="Лайкнуть"></button>
-      </div>
-      <div class="places__place">
-        <img class="places__img" src="./images/karachaevo.jpg" alt="Карачаево-Черкесия">
-        <h2 class="places__title">Карачаево-Черкесия</h2>
-        <button class="places__like-place-btn" type="button"><img class="places__like-place" src="./images/like-icon.svg" alt="Лайкнуть"></button>
-      </div>
     </section>
   </main>
 
   <footer class="footer">
     <p class="footer__copyright" lang="en">&copy; 2021 Mesto Russia</p>
   </footer>
+
+  <template id="place-template">
+    <div class="places__place">
+      <button class="places__delete-place" type="button"></button>
+      <img class="places__img">
+      <h2 class="places__title"></h2>
+      <button class="places__like-place-btn" type="button"></button>
+    </div>
+  </template>
 
   <script src="./scripts/script.js"></script>
 </body>

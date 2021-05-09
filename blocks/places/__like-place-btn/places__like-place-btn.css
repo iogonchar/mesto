@@ -1,5 +1,5 @@
 .places__like-place-btn {
-  background: none;
+  background: url(../../../images/like-icon.svg) center no-repeat;
   border: none;
   padding: 0;
   width: 22px;
