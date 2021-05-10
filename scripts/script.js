@@ -60,7 +60,7 @@ function closePopup(evt) {
   evt.target.closest('.popup').classList.remove('popup_opened');
 }
 
-function formSubmitHandler (evt) {
+function handleSubmitPopupProfile (evt) {
   evt.preventDefault();
   profileAuthor.textContent = inputAuthor.value;
   profileAboutAuthor.textContent = inputAboutAuthor.value;
@@ -90,7 +90,7 @@ function addPlaceCard(placeTitle, placeImageLink) {
   placesContainer.prepend(placeElement);
 }
 
-function addPlaceCardHandler (evt) {
+function handleAddPlaceCard (evt) {
   evt.preventDefault();
 
   addPlaceCard(inputPlaceName.value, inputPlaceImg.value);
@@ -125,6 +125,6 @@ buttonClosePopupEditProfile.addEventListener('click', closePopup);
 buttonClosePopupAddPlace.addEventListener('click', closePopup);
 closePlacePopup.addEventListener('click', closePopup);
 
-formEditProfile.addEventListener('submit', formSubmitHandler);
+formEditProfile.addEventListener('submit', handleSubmitPopupProfile);
 
-formAddPlace.addEventListener('submit', addPlaceCardHandler);
+formAddPlace.addEventListener('submit', handleAddPlaceCard);
