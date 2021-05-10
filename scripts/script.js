@@ -67,7 +67,7 @@ function handleSubmitPopupProfile (evt) {
   closePopup(evt);
 }
 
-function addPlaceCard(placeTitle, placeImageLink) {
+function createPlaceCard(placeTitle, placeImageLink) {
   const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.places__place').cloneNode(true);
 
@@ -87,13 +87,13 @@ function addPlaceCard(placeTitle, placeImageLink) {
     openPlacePopup(evt.target.getAttribute('src'), evt.target.getAttribute('alt'));
   });
 
-  placesContainer.prepend(placeElement);
+  return placeElement;
 }
 
 function handleAddPlaceCard (evt) {
   evt.preventDefault();
 
-  addPlaceCard(inputPlaceName.value, inputPlaceImg.value);
+  placesContainer.prepend(createPlaceCard(inputPlaceName.value, inputPlaceImg.value));
   inputPlaceName.value = '';
   inputPlaceImg.value = '';
 
@@ -108,7 +108,7 @@ function openPlacePopup (img, name) {
 }
 
 placeCards.forEach(function (item) {
-  addPlaceCard(item.name, item.link);
+  placesContainer.append(createPlaceCard(item.name, item.link));
 })
 
 buttonEditProfile.addEventListener('click', function () {
