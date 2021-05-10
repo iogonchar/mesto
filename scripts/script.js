@@ -1,16 +1,16 @@
-const profileEditBtn = document.querySelector('.profile__edit-profile');
-const editProfilePopup = document.querySelector('#edit-profile-popup');
-const closeEditProfilePopup = document.querySelector('#close-edit-profile-popup');
+const buttonEditProfile = document.querySelector('.profile__edit-profile');
+const popupEditProfile = document.querySelector('#edit-profile-popup');
+const buttonClosePopupEditProfile = document.querySelector('#close-edit-profile-popup');
 
-const formElement = document.querySelector('#popup-edit-profile-form');
+const formEditProfile = document.querySelector('#popup-edit-profile-form');
 const profileAuthor = document.querySelector('.profile__author');
 const profileAboutAuthor = document.querySelector('.profile__about-author');
 
-const addPlaceBtn = document.querySelector('.profile__add-button-img');
-const addPlacePopup = document.querySelector('#add-place-popup');
-const closeAddPlacePopup = document.querySelector('#close-add-place-popup');
+const buttonAddPlace = document.querySelector('.profile__add-button-img');
+const popupAddPlace = document.querySelector('#add-place-popup');
+const buttonClosePopupAddPlace = document.querySelector('#close-add-place-popup');
 
-const addPlaceSubmitBtn = document.querySelector('#popup-add-place-form');
+const formAddPlace = document.querySelector('#popup-add-place-form');
 const inputPlaceName = document.querySelector('#place');
 const inputPlaceImg = document.querySelector('#place-img');
 
@@ -111,20 +111,20 @@ placeCards.forEach(function (item) {
   addPlaceCard(item.name, item.link);
 })
 
-profileEditBtn.addEventListener('click', function () {
+buttonEditProfile.addEventListener('click', function () {
   inputAuthor.value = profileAuthor.textContent;
   inputAboutAuthor.value = profileAboutAuthor.textContent;
-  openPopup(editProfilePopup);
+  openPopup(popupEditProfile);
 });
 
-addPlaceBtn.addEventListener('click', function () {
-  openPopup(addPlacePopup);
+buttonAddPlace.addEventListener('click', function () {
+  openPopup(popupAddPlace);
 });
 
-closeEditProfilePopup.addEventListener('click', closePopup);
-closeAddPlacePopup.addEventListener('click', closePopup);
+buttonClosePopupEditProfile.addEventListener('click', closePopup);
+buttonClosePopupAddPlace.addEventListener('click', closePopup);
 closePlacePopup.addEventListener('click', closePopup);
 
-formElement.addEventListener('submit', formSubmitHandler);
+formEditProfile.addEventListener('submit', formSubmitHandler);
 
-addPlaceSubmitBtn.addEventListener('submit', addPlaceCardHandler);
+formAddPlace.addEventListener('submit', addPlaceCardHandler);
