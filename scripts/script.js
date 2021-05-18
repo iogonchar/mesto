@@ -67,8 +67,7 @@ function handleAddPlaceCard (evt) {
   evt.preventDefault();
 
   placesContainer.prepend(createPlaceCard(inputPlaceName.value, inputPlaceImg.value));
-  inputPlaceName.value = '';
-  inputPlaceImg.value = '';
+  formAddPlace.reset();
 
   closePopup(evt);
 }
