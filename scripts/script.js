@@ -6,7 +6,8 @@ const formEditProfile = document.querySelector('#popup-edit-profile-form');
 const profileAuthor = document.querySelector('.profile__author');
 const profileAboutAuthor = document.querySelector('.profile__about-author');
 
-const buttonAddPlace = document.querySelector('.profile__add-button-img');
+// const buttonAddPlace = document.querySelector('.profile__add-button-img');
+const buttonAddPlace = document.querySelector('.profile__add-button');
 const popupAddPlace = document.querySelector('#add-place-popup');
 const buttonClosePopupAddPlace = document.querySelector('#close-add-place-popup');
 
