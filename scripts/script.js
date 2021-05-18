@@ -6,7 +6,6 @@ const formEditProfile = document.querySelector('#popup-edit-profile-form');
 const profileAuthor = document.querySelector('.profile__author');
 const profileAboutAuthor = document.querySelector('.profile__about-author');
 
-// const buttonAddPlace = document.querySelector('.profile__add-button-img');
 const buttonAddPlace = document.querySelector('.profile__add-button');
 const popupAddPlace = document.querySelector('#add-place-popup');
 const buttonClosePopupAddPlace = document.querySelector('#close-add-place-popup');
@@ -58,7 +57,8 @@ function createPlaceCard(placeTitle, placeImageLink) {
   });
 
   placeElement.querySelector('.places__img').addEventListener('click', function (evt) {
-    openPlacePopup(evt.target.getAttribute('src'), evt.target.getAttribute('alt'));
+    // openPlacePopup(evt.target.getAttribute('src'), evt.target.getAttribute('alt'));
+    openPlacePopup(placeImageLink, placeTitle);
   });
 
   return placeElement;
