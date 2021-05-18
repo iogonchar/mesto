@@ -101,7 +101,7 @@ function handleAddPlaceCard (evt) {
 }
 
 function openPlacePopup (img, name) {
-  placePopup.classList.add('popup_opened');
+  openPopup(placePopup);
   popupImg.setAttribute('src', `${img}`);
   popupImg.setAttribute('alt', `${name}`);
   popupText.textContent = name;
