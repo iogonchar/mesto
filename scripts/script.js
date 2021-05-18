@@ -16,7 +16,7 @@ const inputPlaceImg = document.querySelector('#place-img');
 
 const placesContainer = document.querySelector('.places');
 const placePopup = document.querySelector('#place-popup');
-const closePlacePopup = document.querySelector('#place-popup-close');
+const buttonClosePopupPlace = document.querySelector('#place-popup-close');
 
 const popupImg = document.querySelector('.popup__img');
 const popupText = document.querySelector('.popup__text');
@@ -123,7 +123,7 @@ buttonAddPlace.addEventListener('click', function () {
 
 buttonClosePopupEditProfile.addEventListener('click', closePopup);
 buttonClosePopupAddPlace.addEventListener('click', closePopup);
-closePlacePopup.addEventListener('click', closePopup);
+buttonClosePopupPlace.addEventListener('click', closePopup);
 
 formEditProfile.addEventListener('submit', handleSubmitPopupProfile);
 
