@@ -24,6 +24,7 @@ const popupText = document.querySelector('.popup__text');
 const inputAuthor = document.querySelector('#author');
 const inputAboutAuthor = document.querySelector('#about-author');
 
+const popupsArray = Array.from(document.querySelectorAll('.popup'));
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -31,6 +32,12 @@ function openPopup(popup) {
 
 function closePopup(evt) {
   evt.target.closest('.popup').classList.remove('popup_opened');
+}
+
+function handleClosePopup(evt) {
+  if (evt.target === evt.currentTarget){
+    closePopup(evt);
+  }
 }
 
 function handleSubmitPopupProfile (evt) {
@@ -57,7 +64,6 @@ function createPlaceCard(placeTitle, placeImageLink) {
   });
 
   placeElement.querySelector('.places__img').addEventListener('click', function (evt) {
-    // openPlacePopup(evt.target.getAttribute('src'), evt.target.getAttribute('alt'));
     openPlacePopup(placeImageLink, placeTitle);
   });
 
@@ -101,3 +107,18 @@ buttonClosePopupPlace.addEventListener('click', closePopup);
 formEditProfile.addEventListener('submit', handleSubmitPopupProfile);
 
 formAddPlace.addEventListener('submit', handleAddPlaceCard);
+
+popupsArray.forEach((item) => {
+  item.addEventListener('click', handleClosePopup);
+});
+
+
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === 'Escape') {
+    popupsArray.forEach((item) => {
+      if (item.classList.contains('popup_opened')) {
+        item.classList.remove('popup_opened');
+      }
+    });
+  }
+});

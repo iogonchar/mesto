@@ -1,0 +1,12 @@
+.popup__form-field {
+  max-width: 330px;
+  min-height: 57px;
+  position: relative;
+  margin-bottom: 13px;
+}
+
+@media (max-width: 400px) {
+  .popup__form-field {
+    max-width: 250px;
+  }
+}
