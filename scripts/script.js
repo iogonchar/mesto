@@ -5,6 +5,7 @@ function openPopup(popup) {
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEscape);
 }
 
 function handleClosePopup(evt) {
@@ -66,8 +67,7 @@ function closePopupByEscape(evt) {
   if (evt.key === 'Escape') {
     popupsArray.forEach((item) => {
       if (item.classList.contains('popup_opened')) {
-        item.classList.remove('popup_opened');
-        document.removeEventListener('keydown', closePopupByEscape);
+        closePopup(item);
       }
     });
   }
