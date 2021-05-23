@@ -25,3 +25,6 @@ const inputAuthor = document.querySelector('#author');
 const inputAboutAuthor = document.querySelector('#about-author');
 
 const popupsArray = Array.from(document.querySelectorAll('.popup'));
+
+const placeTemplate = document.querySelector('#place-template').content;
+

@@ -21,7 +21,6 @@ function handleSubmitPopupProfile (evt) {
 }
 
 function createPlaceCard(placeTitle, placeImageLink) {
-  const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.places__place').cloneNode(true);
 
   placeElement.querySelector('.places__img').setAttribute('src', `${placeImageLink}`);
