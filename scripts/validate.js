@@ -112,8 +112,3 @@ enableValidation({
   inputErrorClass: 'popup__form-input-error_active',
   errorClass: 'popup__form-input_type_error',
 })
-
-formElement.addEventListener('submit', function (evt) {
-  // Отменим стандартное поведение по сабмиту
-  evt.preventDefault();
-});
