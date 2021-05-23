@@ -23,8 +23,8 @@ function handleSubmitPopupProfile (evt) {
 function createPlaceCard(placeTitle, placeImageLink) {
   const placeElement = placeTemplate.querySelector('.places__place').cloneNode(true);
 
-  placeElement.querySelector('.places__img').setAttribute('src', `${placeImageLink}`);
-  placeElement.querySelector('.places__img').setAttribute('alt', `${placeTitle}`);
+  placeElement.querySelector('.places__img').src = placeImageLink;
+  placeElement.querySelector('.places__img').alt = placeTitle;
   placeElement.querySelector('.places__title').textContent = placeTitle;
 
   placeElement.querySelector('.places__like-place-btn').addEventListener('click', function (evt) {
@@ -53,8 +53,8 @@ function handleAddPlaceCard (evt) {
 
 function openPlacePopup (img, name) {
   openPopup(placePopup);
-  popupImg.setAttribute('src', `${img}`);
-  popupImg.setAttribute('alt', `${name}`);
+  popupImg.src = img;
+  popupImg.alt = name;
   popupText.textContent = name;
 }
 
