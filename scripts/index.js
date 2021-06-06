@@ -16,7 +16,8 @@ import {
   formAddPlace,
   buttonClosePopupPlace,
   popupPlace,
-  popupsArray
+  popupsArray,
+  buttonSubmitAddPlace
 } from './defaultConstants.js'
 
 import { openPopup, closePopup, handleClosePopup } from './popupFunctions.js';
@@ -61,6 +62,8 @@ buttonClosePopupEditProfile.addEventListener('click', function () {
 
 // listener: open add place card popup
 buttonAddPlace.addEventListener('click', function () {
+  buttonSubmitAddPlace.disabled = true;
+  buttonSubmitAddPlace.classList.add('popup__form-submit_inactive');
   openPopup(popupAddPlace);
 });
 

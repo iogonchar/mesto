@@ -40,3 +40,6 @@ export const popupsArray = Array.from(document.querySelectorAll('.popup'));
 // popup: place img and text
 export const popupImg = document.querySelector('.popup__img');
 export const popupText = document.querySelector('.popup__text');
+
+// button: add-place-submit-form
+export const buttonSubmitAddPlace = document.querySelector('#add-place-submit');
