@@ -48,8 +48,10 @@ export class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector('.places__img').src = this._imgLink;
-    this._element.querySelector('.places__img').alt = this._title;
+    const placePopupImg = this._element.querySelector('.places__img')
+
+    placePopupImg.src = this._imgLink;
+    placePopupImg.alt = this._title;
     this._element.querySelector('.places__title').textContent = this._title;
 
     return this._element;
