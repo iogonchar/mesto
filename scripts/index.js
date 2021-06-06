@@ -14,6 +14,8 @@ import {
   buttonClosePopupAddPlace,
   popupAddPlace,
   formAddPlace,
+  buttonClosePopupPlace,
+  popupPlace,
   popupsArray
 } from './defaultConstants.js'
 
@@ -76,4 +78,9 @@ formAddPlace.addEventListener('submit', handleAddPlaceCard);
 // listener: close popup by overlay click
 popupsArray.forEach((item) => {
   item.addEventListener('click', handleClosePopup);
+});
+
+// listener: close place popup
+buttonClosePopupPlace.addEventListener('click', () => {
+  closePopup(popupPlace);
 });

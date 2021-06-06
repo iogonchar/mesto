@@ -35,10 +35,6 @@ export class Card {
       this._handleOpenPopup();
     });
 
-    document.querySelector('#place-popup-close').addEventListener('click', () => {
-      this._handleClosePopup();
-    });
-
     this._element.querySelector('.places__like-place-btn').addEventListener('click', function (evt) {
       evt.target.classList.toggle('places__like-place-btn_active');
     });
