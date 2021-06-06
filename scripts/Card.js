@@ -1,4 +1,4 @@
-import { cardPopup } from "./defaultConstants.js";
+import { cardPopup, popupImg, popupText } from "./defaultConstants.js";
 import { closePopup, openPopup } from "./popupFunctions.js";
 
 export class Card {
@@ -19,9 +19,9 @@ export class Card {
   }
 
   _handleOpenPopup() {
-    document.querySelector('.popup__img').src = this._imgLink;
-    document.querySelector('.popup__img').alt = this._title;
-    document.querySelector('.popup__text').textContent = this._title;
+    popupImg.src = this._imgLink;
+    popupImg.alt = this._title;
+    popupText.textContent = this._title;
 
     openPopup(cardPopup);
   }
