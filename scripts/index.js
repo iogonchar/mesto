@@ -25,10 +25,15 @@ import { handleSubmitPopupProfile, handleAddPlaceCard } from './formFunctions.js
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
+// create card
+export function createCard(item) {
+  const card = new Card(item, '#place-template');
+  return card.generateCard();
+}
+
 // create initial cards
 initialCards.forEach((item) => {
-  const card = new Card(item, '#place-template');
-  const cardElement = card.generateCard();
+  const cardElement = createCard(item);
   cardsContainer.append(cardElement);
 })
 

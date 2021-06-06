@@ -12,7 +12,7 @@ import {
 } from './defaultConstants.js';
 
 import { closePopup } from './popupFunctions.js';
-import { Card } from './Card.js';
+import { createCard } from './index.js'
 
 // edit profile form
 function handleSubmitPopupProfile (evt) {
@@ -30,8 +30,8 @@ function handleAddPlaceCard(evt) {
     name: inputPlaceName.value,
     link: inputPlaceImg.value
   }
-  const card = new Card(cardData, '#place-template');
-  const cardElement = card.generateCard();
+
+  const cardElement = createCard(cardData)
   cardsContainer.prepend(cardElement);
 
   formAddPlace.reset();
