@@ -46,11 +46,17 @@ const formData = {
   errorClass: 'popup__form-input_type_error',
 }
 
-const formsArr = Array.from(document.forms);
-formsArr.forEach((item) => {
-  const cardFormValidator = new FormValidator(formData, item);
-  cardFormValidator.enableValidation();
-});
+// old version
+// const formsArr = Array.from(document.forms);
+// formsArr.forEach((item) => {
+//   const cardFormValidator = new FormValidator(formData, item);
+//   cardFormValidator.enableValidation();
+// });
+
+const cardFormValidator = new FormValidator(formData, formAddPlace);
+cardFormValidator.enableValidation();
+const profileFormValidator = new FormValidator(formData, formEditProfile);
+profileFormValidator.enableValidation();
 
 // listeners
 // listener: open edit profile popup
@@ -67,7 +73,6 @@ buttonClosePopupEditProfile.addEventListener('click', function () {
 
 // listener: open add place card popup
 buttonAddPlace.addEventListener('click', function () {
-  const cardFormValidator = new FormValidator(formData, formAddPlace);
   cardFormValidator.disableSubmitButton();
   openPopup(popupAddPlace);
 });
