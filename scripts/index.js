@@ -17,7 +17,6 @@ import {
   buttonClosePopupPlace,
   popupPlace,
   popupsArray,
-  buttonSubmitAddPlace
 } from './defaultConstants.js'
 
 import { openPopup, closePopup, handleClosePopup } from './popupFunctions.js';
@@ -49,7 +48,8 @@ const formData = {
 
 const formsArr = Array.from(document.forms);
 formsArr.forEach((item) => {
-  new FormValidator(formData, item).enableValidation();
+  const cardFormValidator = new FormValidator(formData, item);
+  cardFormValidator.enableValidation();
 });
 
 // listeners
@@ -67,8 +67,8 @@ buttonClosePopupEditProfile.addEventListener('click', function () {
 
 // listener: open add place card popup
 buttonAddPlace.addEventListener('click', function () {
-  buttonSubmitAddPlace.disabled = true;
-  buttonSubmitAddPlace.classList.add('popup__form-submit_inactive');
+  const cardFormValidator = new FormValidator(formData, formAddPlace);
+  cardFormValidator.disableSubmitButton();
   openPopup(popupAddPlace);
 });
 

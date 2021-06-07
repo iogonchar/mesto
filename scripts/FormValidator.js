@@ -53,8 +53,7 @@ export class FormValidator {
 
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._buttonElement.disabled = true;
-      this._buttonElement.classList.add(this._inactiveButtonClass);
+      this.disableSubmitButton();
     } else {
       this._buttonElement.disabled = false;
       this._buttonElement.classList.remove(this._inactiveButtonClass);
@@ -70,6 +69,12 @@ export class FormValidator {
         this._toggleButtonState();
       });
     })
+  }
+
+  disableSubmitButton() {
+    this._buttonElement = this._getButtonElement();
+    this._buttonElement.disabled = true;
+    this._buttonElement.classList.add(this._inactiveButtonClass);
   }
 
   enableValidation() {
