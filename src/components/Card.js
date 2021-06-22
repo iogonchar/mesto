@@ -1,16 +1,16 @@
-import { cardPopup, popupImg, popupText } from "./defaultConstants.js";
-import { closePopup, openPopup } from "./popupFunctions.js";
+export default class Card {
+  constructor({name, link}, cardSelector, handleCardClick) {
+    this._imgLink = link;
+    this._title = name;
 
-export class Card {
-  constructor(data, cardTemplate) {
-    this._imgLink = data.link;
-    this._title = data.name;
-    this._cardTemplate = cardTemplate;
+    this._cardSelector = cardSelector;
+
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
     const cardElement = document
-      .querySelector(this._cardTemplate)
+      .querySelector(this._cardSelector)
       .content
       .querySelector('.places__place')
       .cloneNode(true);
@@ -18,21 +18,9 @@ export class Card {
     return cardElement;
   }
 
-  _handleOpenPopup() {
-    popupImg.src = this._imgLink;
-    popupImg.alt = this._title;
-    popupText.textContent = this._title;
-
-    openPopup(cardPopup);
-  }
-
-  _handleClosePopup() {
-    closePopup(cardPopup);
-  }
-
   _setEventListeners() {
     this._element.querySelector('.places__img').addEventListener('click', () => {
-      this._handleOpenPopup();
+      this._handleCardClick(this._title, this._imgLink);
     });
 
     this._element.querySelector('.places__like-place-btn').addEventListener('click', function (evt) {

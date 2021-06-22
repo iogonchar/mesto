@@ -8,7 +8,6 @@
 @import url(../blocks/body/body.css);
 
 /* popup styles */
-
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_type/popup_type_form.css);
 @import url(../blocks/popup/_type/popup_type_slide.css);
