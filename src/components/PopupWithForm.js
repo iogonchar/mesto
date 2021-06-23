@@ -9,7 +9,7 @@ export default class PopupWithForm extends Popup {
 
   close() {
     // закрытие попапа
-    this._popup.classList.remove('popup_opened');
+    super.close();
 
     // удаление данных из формы
     this._popup.querySelector('.popup__form').reset();
@@ -30,6 +30,8 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
+    super.setEventListeners();
+
     // слушатель сабмита формы
     this._popup.querySelector('.popup__form').addEventListener('submit', (evt) => {
       // отмена стандартного поведения при сабмите
@@ -37,15 +39,6 @@ export default class PopupWithForm extends Popup {
 
       // обработчик сабмита
       this._handleFormSubmit(this._getInputValues());
-
-      // закрытие попапа
-      this.close();
-    })
-
-    // слушатель закрытия попапа на кнопку закрытия формы
-    this._popup.querySelector('.popup__form-close-btn').addEventListener('click', this.close.bind(this));
-
-    // слушатель закрытия попапа на Esc
-    document.addEventListener('keydown', this._handleEscClose.bind(this));
+    });
   }
 }

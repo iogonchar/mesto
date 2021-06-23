@@ -1,24 +1,30 @@
 import './index.css';
 
 import Section from '../components/Section.js';
-import Card from '../components/Card.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
-import { FormValidator } from '../components/FormValidator.js';
+import FormValidator from '../components/FormValidator.js';
 
-import { handleCardClick } from '../utils/utils.js';
+import { cardRenderer } from '../utils/utils.js';
 
-import {
-  inputAuthor,
-  inputAboutAuthor,
-  buttonEditProfile,
-  buttonAddPlace,
-  formEditProfile,
-  formAddPlace,
-  formData,
-  placesSection,
-  initialCards
-} from '../utils/constants.js';
+import { formData, placesSection, initialCards } from '../utils/constants.js';
+
+// DOM-элементы
+const inputAuthor = document.querySelector('#author');
+const inputAboutAuthor = document.querySelector('#about-author');
+
+const buttonEditProfile = document.querySelector('.profile__edit-profile-btn');
+const buttonAddPlace = document.querySelector('.profile__add-button');
+
+const formEditProfile = document.querySelector('#popup-edit-profile-form');
+const formAddPlace = document.querySelector('#popup-add-place-form');
+
+// валидация форм
+const cardFormValidator = new FormValidator(formData, formAddPlace);
+cardFormValidator.enableValidation();
+const profileFormValidator = new FormValidator(formData, formEditProfile);
+profileFormValidator.enableValidation();
 
 // профиль пользователя
 const user = new UserInfo(
@@ -33,6 +39,8 @@ const popupEditProfile = new PopupWithForm(
     popupSelector: '#edit-profile-popup',
     handleFormSubmit: (formData) => {
       user.setUserInfo(formData);
+
+      popupEditProfile.close();
     }
   }
 );
@@ -41,7 +49,7 @@ popupEditProfile.setEventListeners();
 
 buttonEditProfile.addEventListener('click', () => {
   // подставление информации из профиля в инпуты
-  const userData = user.getUserInfo.bind(user)();
+  const userData = user.getUserInfo();
   inputAuthor.value = userData.author;
   inputAboutAuthor.value = userData.info;
 
@@ -49,18 +57,15 @@ buttonEditProfile.addEventListener('click', () => {
   popupEditProfile.open();
 });
 
-
-
-
 // отрисовываем карточки places
-const cardsList = new Section(
+export const popupPlaceCard = new PopupWithImage('#place-popup');
+popupPlaceCard.setEventListeners();
+
+export const cardsList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, '.place-template', handleCardClick);
-
-      const cardElement = card.generateCard();
-
+      const cardElement = cardRenderer(item);
       cardsList.addItem(cardElement);
     }
   },
@@ -69,27 +74,21 @@ const cardsList = new Section(
 
 cardsList.renderItems();
 
-
 // добавление новой карточки
 const popupAddPlace = new PopupWithForm(
   {
     popupSelector: '#add-place-popup',
     handleFormSubmit: (formData) => {
-      const card = new Card(formData, '.place-template', handleCardClick);
-
-      const cardElement = card.generateCard();
-
+      const cardElement = cardRenderer(formData);
       cardsList.addItem(cardElement);
+
+      popupAddPlace.close();
     }
   }
 );
 popupAddPlace.setEventListeners();
 
-buttonAddPlace.addEventListener('click', popupAddPlace.open.bind(popupAddPlace));
-
-
-// валидация форм
-const cardFormValidator = new FormValidator(formData, formAddPlace);
-cardFormValidator.enableValidation();
-const profileFormValidator = new FormValidator(formData, formEditProfile);
-profileFormValidator.enableValidation();
+buttonAddPlace.addEventListener('click', () => {
+  cardFormValidator.toggleButtonState();
+  popupAddPlace.open();
+});

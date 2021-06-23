@@ -1,15 +1,3 @@
-export const inputAuthor = document.querySelector('#author');
-export const inputAboutAuthor = document.querySelector('#about-author');
-
-export const buttonEditProfile = document.querySelector('.profile__edit-profile-btn');
-export const buttonAddPlace = document.querySelector('.profile__add-button');
-
-export const popupImg = document.querySelector('.popup__img');
-export const popupText = document.querySelector('.popup__text');
-
-export const formEditProfile = document.querySelector('#popup-edit-profile-form');
-export const formAddPlace = document.querySelector('#popup-add-place-form');
-
 export const formData = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',

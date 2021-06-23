@@ -1,4 +1,4 @@
-export class FormValidator {
+export default class FormValidator {
   constructor(data, form) {
     this._formSelector = data.formSelector;
     this._inputSelector = data.inputSelector;
@@ -51,7 +51,7 @@ export class FormValidator {
     })
   }
 
-  _toggleButtonState() {
+  toggleButtonState() {
     if (this._hasInvalidInput()) {
       this.disableSubmitButton();
     } else {
@@ -66,7 +66,7 @@ export class FormValidator {
 
         this._isValid(inputElement)
 
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     })
   }
@@ -80,7 +80,7 @@ export class FormValidator {
   enableValidation() {
     this._inputList = this._getVerifiableInputs();
     this._buttonElement = this._getButtonElement();
-    this._toggleButtonState();
+    this.toggleButtonState();
 
     this._setEventListeners();
   }
