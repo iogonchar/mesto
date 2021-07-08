@@ -3,12 +3,15 @@ import './index.css';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupConfirmDelete from '../components/PopupConfirmDelete.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js';
 
-import { cardRenderer } from '../utils/utils.js';
+import { cardRenderer, renderLoadingForm } from '../utils/utils.js';
 
 import { formData, placesSection, initialCards } from '../utils/constants.js';
+
+import { api } from '../components/Api.js';
 
 // DOM-элементы
 const inputAuthor = document.querySelector('#author');
@@ -16,71 +19,112 @@ const inputAboutAuthor = document.querySelector('#about-author');
 
 const buttonEditProfile = document.querySelector('.profile__edit-profile-btn');
 const buttonAddPlace = document.querySelector('.profile__add-button');
+const buttonUpdateAvatar = document.querySelector('.profile__avatar-btn');
 
 const formEditProfile = document.querySelector('#popup-edit-profile-form');
 const formAddPlace = document.querySelector('#popup-add-place-form');
+const formUpdateAvatar = document.querySelector('#popup-update-avatar-form')
 
 // валидация форм
 const cardFormValidator = new FormValidator(formData, formAddPlace);
 cardFormValidator.enableValidation();
 const profileFormValidator = new FormValidator(formData, formEditProfile);
 profileFormValidator.enableValidation();
+const avatarFormValidator = new FormValidator(formData, formUpdateAvatar)
+avatarFormValidator.enableValidation();
 
 // профиль пользователя
 const user = new UserInfo(
   {
     userNameSelector: '.profile__author',
-    userInfoSelector: '.profile__about-author'
+    userInfoSelector: '.profile__about-author',
+    userAvatarSelector: '.profile__avatar'
   }
 );
 
-const popupEditProfile = new PopupWithForm(
-  {
-    popupSelector: '#edit-profile-popup',
-    handleFormSubmit: (formData) => {
-      user.setUserInfo(formData);
+// Установка изначальных значений в профиль
+api.getUserInfo()
+  .then(res => {
+    user.setUserInfo({author: res.name, about: res.about, avatar: res.avatar})
+  })
+  .catch(err => console.log(err));
 
-      popupEditProfile.close();
-    }
+// Создаем экземпляр класса попапа с формой для редактирования профиля
+const popupEditProfile = new PopupWithForm({
+  popupSelector: '#edit-profile-popup',
+  handleFormSubmit: (formData, buttonSubmit) => {
+    renderLoadingForm(true, buttonSubmit, 'Сохранить', 'Сохранение...')
+    // patch в api + обновление информации на странице
+    api.updateUserInfo(formData)
+      .then(res => {
+        user.setUserInfo({ author: res.name, about: res.about, avatar: res.avatar })
+      })
+      .catch(err => console.log(err))
+      .finally(renderLoadingForm(false, buttonSubmit, 'Сохранить', 'Сохранение...'))
+
+    popupEditProfile.close();
   }
-);
-
+});
 popupEditProfile.setEventListeners();
 
 buttonEditProfile.addEventListener('click', () => {
-  // подставление информации из профиля в инпуты
-  const userData = user.getUserInfo();
-  inputAuthor.value = userData.author;
-  inputAboutAuthor.value = userData.info;
+  // получаем данные для инпутов с сервера
+  api.getUserInfo()
+    .then(res => {
+      inputAuthor.value = res.name;
+      inputAboutAuthor.value = res.about;
+    })
+    .catch(err => console.log(err));
 
   // открытие попапа
   popupEditProfile.open();
 });
 
-// отрисовываем карточки places
+// Создание экземпляра класса попапа с картинкой
 export const popupPlaceCard = new PopupWithImage('#place-popup');
 popupPlaceCard.setEventListeners();
 
+// Создание экземпляра класса секции с карточками
 export const cardsList = new Section(
   {
     items: initialCards,
-    renderer: (item) => {
-      const cardElement = cardRenderer(item);
-      cardsList.addItem(cardElement);
+    renderer: () => {
+
+      api.getInitialCards()
+        .then(res => {
+          res.reverse().forEach(item => {
+            api.getUserInfo()
+            .then(res => {
+              const cardElement = cardRenderer(item, res);
+              cardsList.addItem(cardElement);
+            })
+            .catch(err => console.log(err));
+          })
+        })
+        .catch(err => console.log(err));
     }
   },
   placesSection
 );
-
+// отрисовываем карточки places
 cardsList.renderItems();
 
 // добавление новой карточки
 const popupAddPlace = new PopupWithForm(
   {
     popupSelector: '#add-place-popup',
-    handleFormSubmit: (formData) => {
-      const cardElement = cardRenderer(formData);
-      cardsList.addItem(cardElement);
+    handleFormSubmit: (formData, buttonSubmit) => {
+      renderLoadingForm(true, buttonSubmit, 'Сохранить', 'Сохранение...');
+      api.getUserInfo()
+      .then(userData => {
+        api.addNewCard(formData, userData)
+        .then(res => {
+          const cardElement = cardRenderer(res, userData);
+          cardsList.addItem(cardElement);
+        })
+        .catch(err => console.log(err))
+        .finally(renderLoadingForm(false, buttonSubmit, 'Сохранить', 'Сохранение...'))
+      })
 
       popupAddPlace.close();
     }
@@ -92,3 +136,39 @@ buttonAddPlace.addEventListener('click', () => {
   cardFormValidator.toggleButtonState();
   popupAddPlace.open();
 });
+
+const popupUpdateAvatar = new PopupWithForm({
+  popupSelector: '#update-avatar-popup',
+  handleFormSubmit: (formData, buttonSubmit) => {
+    renderLoadingForm(true, buttonSubmit, 'Сохранить', 'Сохранение...');
+    api.updateUserAvatar(formData)
+      .then(res => {
+        user.setUserAvatar(res.avatar)
+      })
+      .catch(err => console.log(err))
+      .finally(renderLoadingForm(false, buttonSubmit, 'Сохранить', 'Сохранение...'))
+
+      popupUpdateAvatar.close();
+  }
+})
+popupUpdateAvatar.setEventListeners();
+
+buttonUpdateAvatar.addEventListener('click', () => {
+  avatarFormValidator.toggleButtonState();
+  popupUpdateAvatar.open();
+})
+
+// popup confirm delete
+export const popupConfirmDelete = new PopupConfirmDelete({
+  popupSelector: '#delete-place-popup',
+  handleFormSubmit: (cardId, cardEvt) => {
+    api.deleteCard(cardId)
+    .then(res => {
+      cardEvt.target.closest('.places__place').remove();
+      popupConfirmDelete.close();
+    })
+    .catch(err => console.log(err));
+  }
+})
+
+popupConfirmDelete.setEventListeners();

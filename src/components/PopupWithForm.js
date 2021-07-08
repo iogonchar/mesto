@@ -37,8 +37,10 @@ export default class PopupWithForm extends Popup {
       // отмена стандартного поведения при сабмите
       evt.preventDefault();
 
+      const buttonSubmit = this._popup.querySelector('.popup__form-submit');
+
       // обработчик сабмита
-      this._handleFormSubmit(this._getInputValues());
+      this._handleFormSubmit(this._getInputValues(), buttonSubmit);
     });
   }
 }

@@ -1,14 +1,36 @@
 import Card from '../components/Card.js';
 
-import { cardsList, popupPlaceCard } from '../pages/index.js';
+import { api } from '../components/Api.js';
+
+import { popupPlaceCard, popupConfirmDelete } from '../pages/index.js';
 
 // функция открытия попапа при клике на карточку
-export const handleCardClick = (title, imgLink) => {
+const handleCardClick = (title, imgLink) => {
   popupPlaceCard.open(title, imgLink)
 }
 
-export const cardRenderer = (obj) => {
-  const card = new Card(obj, '.place-template', handleCardClick);
+const handleLikeClick = (cardId, isLiked) => {
+  if (!isLiked) {
+    return api.addLike(cardId)
+  } else {
+    return api.deleteLike(cardId)
+  }
+}
 
+const handleDeleteClick = (cardId, cardEvt) => {
+  popupConfirmDelete.open(cardId, cardEvt);
+}
+
+export const cardRenderer = (cardData, userData) => {
+  const card = new Card(cardData, userData, '.place-template', handleCardClick, handleLikeClick, handleDeleteClick);
+  // console.log(cardData)
   return card.generateCard();
+}
+
+export const renderLoadingForm = (isLoading, buttonSubmit, mainText, loadingText) => {
+  if (isLoading) {
+    buttonSubmit.textContent = loadingText;
+  } else {
+    buttonSubmit.textContent = mainText;
+  }
 }
