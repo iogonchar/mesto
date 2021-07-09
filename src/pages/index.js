@@ -11,8 +11,6 @@ import { cardRenderer, renderLoadingForm } from '../utils/utils.js';
 
 import { formData, placesSection, initialCards } from '../utils/constants.js';
 
-import { api } from '../components/Api.js';
-
 // DOM-элементы
 const inputAuthor = document.querySelector('#author');
 const inputAboutAuthor = document.querySelector('#about-author');
@@ -32,6 +30,15 @@ const profileFormValidator = new FormValidator(formData, formEditProfile);
 profileFormValidator.enableValidation();
 const avatarFormValidator = new FormValidator(formData, formUpdateAvatar)
 avatarFormValidator.enableValidation();
+
+// подключение к апи
+export const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',
+  headers: {
+    authorization: '9e82b33c-b2e5-449e-9e88-6aec219db861',
+    'Content-Type': 'application/json'
+  }
+});
 
 // профиль пользователя
 const user = new UserInfo(

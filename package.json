@@ -1,7 +1,7 @@
 {
   "name": "praktikum",
   "version": "0.0.1",
-  "description": "",
+  "description": "* Интро\r * Используемые технологии\r * Результат на данный момент",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -26,5 +26,13 @@
   },
   "dependencies": {
     "core-js": "^3.14.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iogonchar/mesto.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iogonchar/mesto/issues"
+  },
+  "homepage": "https://github.com/iogonchar/mesto#readme"
 }

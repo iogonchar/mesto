@@ -1,6 +1,6 @@
 import Card from '../components/Card.js';
 
-import { api } from '../components/Api.js';
+import { api } from '../pages/index.js';
 
 import { popupPlaceCard, popupConfirmDelete } from '../pages/index.js';
 
