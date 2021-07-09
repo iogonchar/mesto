@@ -65,12 +65,11 @@ const popupEditProfile = new PopupWithForm({
     // patch в api + обновление информации на странице
     api.updateUserInfo(formData)
       .then(res => {
-        user.setUserInfo({ author: res.name, about: res.about, avatar: res.avatar })
+        user.setUserInfo({ author: res.name, about: res.about, avatar: res.avatar });
+        popupEditProfile.close();
       })
       .catch(err => console.log(err))
-      .finally(renderLoadingForm(false, buttonSubmit, 'Сохранить', 'Сохранение...'))
-
-    popupEditProfile.close();
+      .finally(() => renderLoadingForm(false, buttonSubmit, 'Сохранить', 'Сохранение...'))
   }
 });
 popupEditProfile.setEventListeners();
@@ -129,12 +128,11 @@ const popupAddPlace = new PopupWithForm(
         .then(res => {
           const cardElement = cardRenderer(res, userData);
           cardsList.addItem(cardElement);
+          popupAddPlace.close();
         })
         .catch(err => console.log(err))
-        .finally(renderLoadingForm(false, buttonSubmit, 'Сохранить', 'Сохранение...'))
+        .finally(() => renderLoadingForm(false, buttonSubmit, 'Сохранить', 'Сохранение...'));
       })
-
-      popupAddPlace.close();
     }
   }
 );
@@ -151,12 +149,11 @@ const popupUpdateAvatar = new PopupWithForm({
     renderLoadingForm(true, buttonSubmit, 'Сохранить', 'Сохранение...');
     api.updateUserAvatar(formData)
       .then(res => {
-        user.setUserAvatar(res.avatar)
+        user.setUserAvatar(res.avatar);
+        popupUpdateAvatar.close();
       })
       .catch(err => console.log(err))
-      .finally(renderLoadingForm(false, buttonSubmit, 'Сохранить', 'Сохранение...'))
-
-      popupUpdateAvatar.close();
+      .finally(() => renderLoadingForm(false, buttonSubmit, 'Сохранить', 'Сохранение...'));
   }
 })
 popupUpdateAvatar.setEventListeners();
