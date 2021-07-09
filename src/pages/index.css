@@ -48,6 +48,7 @@
 /* places section styles */
 @import url(../blocks/places/places.css);
 @import url(../blocks/places/__delete-place/places__delete-place.css);
+@import url(../blocks/places/__delete-place/_display/places__delete-place_display_none.css);
 @import url(../blocks/places/__place/places__place.css);
 @import url(../blocks/places/__img/places__img.css);
 @import url(../blocks/places/__title/places__title.css);

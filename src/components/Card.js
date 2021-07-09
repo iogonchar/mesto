@@ -60,7 +60,7 @@ export default class Card {
     this._element.querySelector('.places__title').textContent = this._title;
 
     if (this._ownerId !== this._userId) {
-      this._element.querySelector('.places__delete-place').style.display = 'none';
+      this._element.querySelector('.places__delete-place').classList.add('places__delete-place_display_none');
     }
 
     // Проверяем мой лайк
