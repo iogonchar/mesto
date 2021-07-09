@@ -1,4 +1,3 @@
-// Отрефакторено
 export default class UserInfo {
   constructor({ userNameSelector, userInfoSelector, userAvatarSelector }) {
     this._userNameSelector = userNameSelector;
@@ -8,6 +7,16 @@ export default class UserInfo {
     this._UserName = document.querySelector(this._userNameSelector);
     this._UserInfo = document.querySelector(this._userInfoSelector);
     this._userAvatar = document.querySelector(this._userAvatarSelector);
+  }
+
+  getUserInfo() {
+    // получение имеющихся данных пользователя
+    this._userData = {
+      author: this._UserName.textContent,
+      info: this._UserInfo.textContent
+    };
+
+    return this._userData;
   }
 
   setUserInfo(formData) {

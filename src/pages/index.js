@@ -76,12 +76,9 @@ popupEditProfile.setEventListeners();
 
 buttonEditProfile.addEventListener('click', () => {
   // получаем данные для инпутов с сервера
-  api.getUserInfo()
-    .then(res => {
-      inputAuthor.value = res.name;
-      inputAboutAuthor.value = res.about;
-    })
-    .catch(err => console.log(err));
+  const userData = user.getUserInfo();
+  inputAuthor.value = userData.author;
+  inputAboutAuthor.value = userData.info;
 
   // открытие попапа
   popupEditProfile.open();
