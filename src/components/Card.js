@@ -41,6 +41,7 @@ export default class Card {
           evt.target.classList.toggle('places__like-place-btn_active');
           this._isLiked = !this._isLiked;
         })
+        .catch(err => console.log(err));
     })
 
     this._element.querySelector('.places__delete-place').addEventListener('click', (evt) => {
