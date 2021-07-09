@@ -2,13 +2,14 @@ import './index.css';
 
 import Api from '../components/Api.js';
 import Section from '../components/Section.js';
+import Card from '../components/Card.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupConfirmDelete from '../components/PopupConfirmDelete.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js';
 
-import { cardRenderer, renderLoadingForm } from '../utils/utils.js';
+import { renderLoadingForm } from '../utils/utils.js';
 
 import { formData, placesSection, initialCards } from '../utils/constants.js';
 
@@ -33,13 +34,38 @@ const avatarFormValidator = new FormValidator(formData, formUpdateAvatar)
 avatarFormValidator.enableValidation();
 
 // подключение к апи
-export const api = new Api({
+const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',
   headers: {
     authorization: '9e82b33c-b2e5-449e-9e88-6aec219db861',
     'Content-Type': 'application/json'
   }
 });
+
+
+// функция открытия попапа при клике на карточку
+const handleCardClick = (title, imgLink) => {
+  popupPlaceCard.open(title, imgLink)
+}
+
+const handleLikeClick = (cardId, isLiked) => {
+  if (!isLiked) {
+    return api.addLike(cardId)
+  } else {
+    return api.deleteLike(cardId)
+  }
+}
+
+const handleDeleteClick = (cardId, cardEvt) => {
+  popupConfirmDelete.open(cardId, cardEvt);
+}
+
+const cardRenderer = (cardData, userData) => {
+  const card = new Card(cardData, userData, '.place-template', handleCardClick, handleLikeClick, handleDeleteClick);
+  // console.log(cardData)
+  return card.generateCard();
+}
+
 
 // профиль пользователя
 const user = new UserInfo(
@@ -85,11 +111,11 @@ buttonEditProfile.addEventListener('click', () => {
 });
 
 // Создание экземпляра класса попапа с картинкой
-export const popupPlaceCard = new PopupWithImage('#place-popup');
+const popupPlaceCard = new PopupWithImage('#place-popup');
 popupPlaceCard.setEventListeners();
 
 // Создание экземпляра класса секции с карточками
-export const cardsList = new Section(
+const cardsList = new Section(
   {
     items: initialCards,
     renderer: () => {
@@ -161,15 +187,17 @@ buttonUpdateAvatar.addEventListener('click', () => {
 })
 
 // popup confirm delete
-export const popupConfirmDelete = new PopupConfirmDelete({
+const popupConfirmDelete = new PopupConfirmDelete({
   popupSelector: '#delete-place-popup',
-  handleFormSubmit: (cardId, cardEvt) => {
+  handleFormSubmit: (cardId, buttonSubmit, cardEvt) => {
+    renderLoadingForm(true, buttonSubmit, 'Да', 'Удаление...');
     api.deleteCard(cardId)
     .then(res => {
       cardEvt.target.closest('.places__place').remove();
       popupConfirmDelete.close();
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+    .finally(() => renderLoadingForm(false, buttonSubmit, 'Да', 'Удаление...'));
   }
 })
 

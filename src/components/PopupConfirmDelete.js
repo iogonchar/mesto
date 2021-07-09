@@ -21,10 +21,10 @@ export default class PopupConfirmDelete extends Popup {
       // отмена стандартного поведения при сабмите
       evt.preventDefault();
 
-      // const buttonSubmit = this._popup.querySelector('.popup__form-submit');
+      const buttonSubmit = this._popup.querySelector('.popup__form-submit');
 
       // обработчик сабмита
-      this._handleFormSubmit(this._cardId, this._cardEvt);
+      this._handleFormSubmit(this._cardId, buttonSubmit, this._cardEvt);
     });
   }
 }
