@@ -77,7 +77,8 @@ const user = new UserInfo(
 );
 
 // Установка изначальных значений в профиль
-api.getUserInfo()
+const userInfo = api.getUserInfo();
+userInfo
   .then(res => {
     user.setUserInfo({author: res.name, about: res.about, avatar: res.avatar})
   })
@@ -117,27 +118,24 @@ popupPlaceCard.setEventListeners();
 // Создание экземпляра класса секции с карточками
 const cardsList = new Section(
   {
-    items: initialCards,
-    renderer: () => {
-
-      api.getInitialCards()
+    renderer: (item) => {
+      userInfo
         .then(res => {
-          res.reverse().forEach(item => {
-            api.getUserInfo()
-            .then(res => {
-              const cardElement = cardRenderer(item, res);
-              cardsList.addItem(cardElement);
-            })
-            .catch(err => console.log(err));
-          })
+          const cardElement = cardRenderer(item, res);
+          cardsList.addItem(cardElement);
         })
         .catch(err => console.log(err));
     }
   },
   placesSection
 );
+
 // отрисовываем карточки places
-cardsList.renderItems();
+api.getInitialCards()
+  .then(res => {
+    cardsList.renderItems(res);
+  })
+  .catch(err => console.log(err));
 
 // добавление новой карточки
 const popupAddPlace = new PopupWithForm(
@@ -145,7 +143,7 @@ const popupAddPlace = new PopupWithForm(
     popupSelector: '#add-place-popup',
     handleFormSubmit: (formData, buttonSubmit) => {
       renderLoadingForm(true, buttonSubmit, 'Сохранить', 'Сохранение...');
-      api.getUserInfo()
+      userInfo
       .then(userData => {
         api.addNewCard(formData, userData)
         .then(res => {

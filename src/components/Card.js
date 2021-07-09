@@ -7,6 +7,7 @@ export default class Card {
 
     this._cardId = cardData._id;
     this._likes = cardData.likes;
+    // console.log(this._likes);
     this._ownerId = cardData.owner._id;
 
     this._isLiked = false;
