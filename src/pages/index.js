@@ -11,7 +11,7 @@ import FormValidator from '../components/FormValidator.js';
 
 import { renderLoadingForm } from '../utils/utils.js';
 
-import { formData, placesSection, initialCards } from '../utils/constants.js';
+import { formData, placesSection } from '../utils/constants.js';
 
 // DOM-элементы
 const inputAuthor = document.querySelector('#author');
@@ -187,15 +187,12 @@ buttonUpdateAvatar.addEventListener('click', () => {
 // popup confirm delete
 const popupConfirmDelete = new PopupConfirmDelete({
   popupSelector: '#delete-place-popup',
-  handleFormSubmit: (cardId, buttonSubmit, cardEvt) => {
+  handleFormSubmit: (cardId, buttonSubmit) => {
     renderLoadingForm(true, buttonSubmit, 'Да', 'Удаление...');
-    api.deleteCard(cardId)
-    .then(res => {
-      cardEvt.target.closest('.places__place').remove();
-      popupConfirmDelete.close();
-    })
-    .catch(err => console.log(err))
-    .finally(() => renderLoadingForm(false, buttonSubmit, 'Да', 'Удаление...'));
+    return api.deleteCard(cardId)
+      .then(() => popupConfirmDelete.close())
+      .catch(err => console.log(err))
+      .finally(() => renderLoadingForm(false, buttonSubmit, 'Да', 'Удаление...'));
   }
 })
 
