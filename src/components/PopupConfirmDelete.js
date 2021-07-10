@@ -24,11 +24,7 @@ export default class PopupConfirmDelete extends Popup {
       const buttonSubmit = this._popup.querySelector('.popup__form-submit');
 
       // обработчик сабмита
-      this._handleFormSubmit(this._cardId, buttonSubmit)
-        .then(() => {
-          this._cardEvt.target.closest('.places__place').remove();
-        })
-        .catch(err => console.log(err))
+      this._handleFormSubmit(this._cardId, buttonSubmit);
     });
   }
 }
