@@ -1,9 +1,9 @@
 export default class Card {
-  constructor(cardData, userData, cardSelector, handleCardClick, handleLikeClick, handleDeleteClick) {
+  constructor(cardData, userId, cardSelector, handleCardClick, handleLikeClick, handleDeleteClick) {
     this._imgLink = cardData.link;
     this._title = cardData.name;
 
-    this._userId = userData._id
+    this._userId = userId;
 
     this._cardId = cardData._id;
     this._likes = cardData.likes;
@@ -38,7 +38,7 @@ export default class Card {
       this._handleLikeClick(this._cardId, this._isLiked)
         .then(res => {
           this._element.querySelector('.places__likes-count').textContent = res.likes.length
-          console.log(res.likes.length)
+          // console.log(res.likes.length)
           evt.target.classList.toggle('places__like-place-btn_active');
           this._isLiked = !this._isLiked;
         })
